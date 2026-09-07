@@ -1,0 +1,167 @@
+openapi: 3.1.0
+info:
+  title: StoryScout Recording Ingestion API
+  version: 1.1.0
+  description: GUID-gated, direct-to-S3 browser recording ingestion. Processing and delivery are separate modules.
+  license:
+    name: Proprietary
+    identifier: LicenseRef-Proprietary
+servers:
+  - url: /api/v1
+security: []
+paths:
+  /health:
+    get:
+      summary: Check process health
+      operationId: getHealth
+      responses:
+        '200':
+          {
+            description: Process is healthy,
+            content: { application/json: { schema: { $ref: '#/components/schemas/Status' } } },
+          }
+        '404': { $ref: '#/components/responses/Error' }
+  /ready:
+    get:
+      summary: Check S3 readiness
+      operationId: getReadiness
+      responses:
+        '200':
+          {
+            description: S3 is reachable,
+            content: { application/json: { schema: { $ref: '#/components/schemas/Status' } } },
+          }
+        '503': { description: S3 is not reachable }
+        '404': { $ref: '#/components/responses/Error' }
+  /access-sessions:
+    post:
+      summary: Validate a participant access code
+      operationId: createAccessSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [guid]
+              properties: { guid: { type: string, format: uuid } }
+      responses:
+        '201':
+          description: Temporary access granted
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [accessToken, displayName, expiresAt]
+                properties:
+                  accessToken: { type: string }
+                  displayName: { type: string }
+                  expiresAt: { type: string, format: date-time }
+        '401': { $ref: '#/components/responses/Error' }
+  /recordings:
+    post:
+      summary: Create a direct S3 recording upload
+      operationId: createRecordingUpload
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [originalFilename, contentType, sizeBytes]
+              properties:
+                originalFilename: { type: string }
+                contentType: { $ref: '#/components/schemas/AudioContentType' }
+                sizeBytes: { type: integer, minimum: 1 }
+      responses:
+        '201':
+          description: Recording created with scoped S3 upload instructions
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [recording, upload]
+                properties:
+                  recording: { $ref: '#/components/schemas/Recording' }
+                  upload:
+                    type: object
+                    required: [url, method, headers, expiresAt]
+                    properties:
+                      url: { type: string, format: uri }
+                      method: { type: string, const: PUT }
+                      headers: { type: object, additionalProperties: { type: string } }
+                      expiresAt: { type: string, format: date-time }
+        '401': { $ref: '#/components/responses/Error' }
+        '413': { $ref: '#/components/responses/Error' }
+  /recordings/{recordingId}:
+    parameters: [{ $ref: '#/components/parameters/RecordingId' }]
+    get:
+      summary: Get recording ingestion status
+      operationId: getRecording
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          {
+            description: Recording ingestion status,
+            content: { application/json: { schema: { $ref: '#/components/schemas/Recording' } } },
+          }
+        '404': { $ref: '#/components/responses/Error' }
+  /recordings/{recordingId}/complete:
+    parameters: [{ $ref: '#/components/parameters/RecordingId' }]
+    post:
+      summary: Verify and complete a recording upload
+      operationId: completeRecordingUpload
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          {
+            description: S3 upload verified,
+            content: { application/json: { schema: { $ref: '#/components/schemas/Recording' } } },
+          }
+        '409': { $ref: '#/components/responses/Error' }
+components:
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer }
+  parameters:
+    RecordingId:
+      name: recordingId
+      in: path
+      required: true
+      schema: { type: string, pattern: '^recording_[A-Za-z0-9_-]+$' }
+  schemas:
+    Status:
+      type: object
+      required: [status]
+      properties: { status: { type: string } }
+    AudioContentType:
+      type: string
+      enum: [audio/mp4, audio/mpeg, audio/wav, audio/x-wav, audio/webm]
+    Recording:
+      type: object
+      required:
+        [recordingId, participantName, createdAt, storageState, originalFilename, contentType]
+      properties:
+        recordingId: { type: string }
+        participantName: { type: string }
+        createdAt: { type: string, format: date-time }
+        completedAt: { type: [string, 'null'], format: date-time }
+        storageState: { type: string, enum: [awaitingUpload, ready] }
+        originalFilename: { type: string }
+        contentType: { $ref: '#/components/schemas/AudioContentType' }
+        sizeBytes: { type: [integer, 'null'] }
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, requestId]
+          properties:
+            code: { type: string }
+            message: { type: string }
+            requestId: { type: string }
+  responses:
+    Error:
+      description: Request rejected
+      content: { application/json: { schema: { $ref: '#/components/schemas/ErrorResponse' } } }
