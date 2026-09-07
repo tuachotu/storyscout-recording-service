@@ -21,8 +21,9 @@
   `tuachotu/storyscout-recording-service` and pushed local `main` with upstream tracking.
 - Final pre-publication `npm run check` passed OpenAPI, Postman JSON, TypeScript, ESLint, Prettier,
   7 active tests, and the production build.
-- Next action: none for repository publication after the final documentation checkpoint is pushed
-  and remote visibility/default-branch verification passes.
+- Final documentation checkpoint was pushed. GitHub verification confirms public visibility,
+  `main` as the default branch, and synchronized local/upstream branches.
+- Next action: none for repository publication.
 
 ## Recording ingestion Module 1 — August 22, 2026
 
