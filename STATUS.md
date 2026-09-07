@@ -17,7 +17,12 @@
   and build content is absent.
 - Created the initial local commit `5bf7f2e` (`Initial StoryScout recording service`) after staged
   whitespace and credential-pattern checks passed.
-- Next action: request the required immediate approval before creating the public GitHub repository.
+- User approved the exact external provisioning action; created the public GitHub repository
+  `tuachotu/storyscout-recording-service` and pushed local `main` with upstream tracking.
+- Final pre-publication `npm run check` passed OpenAPI, Postman JSON, TypeScript, ESLint, Prettier,
+  7 active tests, and the production build.
+- Next action: none for repository publication after the final documentation checkpoint is pushed
+  and remote visibility/default-branch verification passes.
 
 ## Recording ingestion Module 1 — August 22, 2026
 
@@ -43,5 +48,5 @@
 - Current blockers: None for Phase 7
 - Last validation: Phase 7 full gate passed before paid work: contract, TypeScript, ESLint, Prettier, 19 tests, and production build; the shared repository is now concurrently changing under another approved workstream
 - Known incomplete files: None within approved implementation scope
-- Git status: Initialized on `main`; initial commit `5bf7f2e` created; no remote configured yet
+- Git status: `main` tracks `origin/main` at `https://github.com/tuachotu/storyscout-recording-service`
 - Application status: Phase 7 checkpoint is `~/storyscout/planning/2026-08-22/failed-recordings-recovery.json`; recordings 6, 7, and 18 all have verified beside-source transcripts
