@@ -28,6 +28,7 @@ export interface IngestionStorage {
   ready(): Promise<void>;
   save(record: IngestionRecord): Promise<void>;
   get(metadataKey: string): Promise<IngestionRecord | null>;
+  getTranscription(record: IngestionRecord): Promise<string | null>;
   createUploadUrl(record: IngestionRecord, expiresIn: number): Promise<string>;
   inspectUpload(record: IngestionRecord): Promise<{ sizeBytes: number; contentType?: string }>;
 }
@@ -61,6 +62,28 @@ export class S3IngestionStorage implements IngestionStorage {
       );
       if (!response.Body) return null;
       return JSON.parse(await response.Body.transformToString()) as IngestionRecord;
+    } catch (error) {
+      if (
+        typeof error === 'object' &&
+        error !== null &&
+        ((error as { $metadata?: { httpStatusCode?: number } }).$metadata?.httpStatusCode === 404 ||
+          (error as { name?: string }).name === 'NoSuchKey')
+      )
+        return null;
+      throw error;
+    }
+  }
+
+  async getTranscription(record: IngestionRecord): Promise<string | null> {
+    try {
+      const response = await this.client.send(
+        new GetObjectCommand({
+          Bucket: this.bucket,
+          Key: record.metadataKey.replace(/metadata\.json$/, 'transcription.txt'),
+        }),
+      );
+      if (!response.Body) return null;
+      return response.Body.transformToString();
     } catch (error) {
       if (
         typeof error === 'object' &&

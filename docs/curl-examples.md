@@ -1,8 +1,9 @@
 # StoryScout API curl examples
 
-These examples exercise the approved Record and Transcribe REST contract. The
-Record commands are executable against the local backend; Transcribe commands
-remain contract examples until that separately approved phase is implemented.
+These examples exercise the approved Record and Transcribe REST contract. The Record commands and
+recording-transcription retrieval are executable against the backend. The older transcription-job
+commands remain contract examples until that separately approved phase is integrated into the
+running application.
 
 ## Configure the local URL and sample file
 
@@ -64,6 +65,23 @@ curl \
   --header "Accept: application/json" \
   "${STORYSCOUT_API_URL}/recordings/${RECORDING_ID}"
 ```
+
+## Get the recording transcription
+
+The transcription worker stores `transcription.txt` beside the recording objects in S3. Retrieval
+requires the same participant bearer session used for recording access.
+
+```bash
+curl \
+  --request GET \
+  --header "Accept: application/json" \
+  --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+  "${STORYSCOUT_API_URL}/recordings/${RECORDING_ID}/transcription"
+```
+
+The response contains the recording metadata and `transcription.text`. A ready recording without a
+`transcription.txt` object returns `404 TRANSCRIPTION_NOT_FOUND`; an incomplete recording returns
+`409 RECORDING_NOT_READY`.
 
 ## Stream the complete audio file
 

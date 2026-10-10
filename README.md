@@ -62,14 +62,15 @@ keys to this repository.
 
 ## API overview
 
-| Method | Route                                       | Purpose                                                         |
-| ------ | ------------------------------------------- | --------------------------------------------------------------- |
-| `GET`  | `/api/v1/health`                            | Process health check.                                           |
-| `GET`  | `/api/v1/ready`                             | S3 readiness check.                                             |
-| `POST` | `/api/v1/access-sessions`                   | Exchange a participant GUID for a temporary bearer token.       |
-| `POST` | `/api/v1/recordings`                        | Create a recording and obtain presigned S3 upload instructions. |
-| `GET`  | `/api/v1/recordings/{recordingId}`          | Read participant-owned recording status.                        |
-| `POST` | `/api/v1/recordings/{recordingId}/complete` | Verify the S3 object and complete ingestion.                    |
+| Method | Route                                            | Purpose                                                         |
+| ------ | ------------------------------------------------ | --------------------------------------------------------------- |
+| `GET`  | `/api/v1/health`                                 | Process health check.                                           |
+| `GET`  | `/api/v1/ready`                                  | S3 readiness check.                                             |
+| `POST` | `/api/v1/access-sessions`                        | Exchange a participant GUID for a temporary bearer token.       |
+| `POST` | `/api/v1/recordings`                             | Create a recording and obtain presigned S3 upload instructions. |
+| `GET`  | `/api/v1/recordings/{recordingId}`               | Read participant-owned recording status.                        |
+| `POST` | `/api/v1/recordings/{recordingId}/complete`      | Verify the S3 object and complete ingestion.                    |
+| `GET`  | `/api/v1/recordings/{recordingId}/transcription` | Return recording metadata and its S3 transcript.                |
 
 See [`openapi/storyscout-v1.yaml`](openapi/storyscout-v1.yaml) for the full contract and
 [`docs/curl-examples.md`](docs/curl-examples.md) for request examples. A generated Postman

@@ -82,11 +82,66 @@ describe('recording ingestion module', () => {
     storage.isReady = false;
     expect((await app.inject({ method: 'GET', url: '/api/v1/ready' })).statusCode).toBe(503);
   });
+
+  it('returns a completed recording transcription with recording metadata', async () => {
+    const { app, storage } = await createApp();
+    const token = await tokenFor(app, GUID);
+    const id = (await createRecording(app, token)).json().recording.recordingId as string;
+    storage.uploads.set(id, { sizeBytes: 5, contentType: 'audio/webm' });
+    await complete(app, id, token);
+    storage.transcriptions.set(id, 'A story from S3.');
+
+    const response = await getTranscription(app, id, token);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.json()).toMatchObject({
+      recording: {
+        recordingId: id,
+        participantName: 'Pilot One',
+        storageState: 'ready',
+        originalFilename: 'story.webm',
+        contentType: 'audio/webm',
+        sizeBytes: 5,
+      },
+      transcription: { text: 'A story from S3.' },
+    });
+  });
+
+  it('reports unavailable transcriptions without exposing another participant recording', async () => {
+    const { app, storage } = await createApp();
+    const owner = await tokenFor(app, GUID);
+    const id = (await createRecording(app, owner)).json().recording.recordingId as string;
+
+    expect(
+      (
+        await app.inject({
+          method: 'GET',
+          url: `/api/v1/recordings/${id}/transcription`,
+        })
+      ).statusCode,
+    ).toBe(401);
+    const invalid = await getTranscription(app, 'not-valid!', owner);
+    expect(invalid.statusCode).toBe(400);
+    expect(invalid.json().error.code).toBe('INVALID_REQUEST');
+    expect((await getTranscription(app, id, owner)).json().error.code).toBe('RECORDING_NOT_READY');
+    storage.uploads.set(id, { sizeBytes: 5, contentType: 'audio/webm' });
+    await complete(app, id, owner);
+    expect((await getTranscription(app, id, owner)).json().error.code).toBe(
+      'TRANSCRIPTION_NOT_FOUND',
+    );
+
+    storage.transcriptions.set(id, 'Private story.');
+    const other = await tokenFor(app, OTHER_GUID);
+    const hidden = await getTranscription(app, id, other);
+    expect(hidden.statusCode).toBe(404);
+    expect(hidden.json().error.code).toBe('RECORDING_NOT_FOUND');
+  });
 });
 
 class MemoryStorage implements IngestionStorage {
   records = new Map<string, IngestionRecord>();
   uploads = new Map<string, { sizeBytes: number; contentType?: string }>();
+  transcriptions = new Map<string, string>();
   isReady = true;
   async ready() {
     if (!this.isReady) throw new Error('unavailable');
@@ -99,6 +154,9 @@ class MemoryStorage implements IngestionStorage {
   }
   async createUploadUrl(record: IngestionRecord) {
     return `https://upload.test/${record.recordingId}`;
+  }
+  async getTranscription(record: IngestionRecord) {
+    return this.transcriptions.get(record.recordingId) ?? null;
   }
   async inspectUpload(record: IngestionRecord) {
     const upload = this.uploads.get(record.recordingId);
@@ -153,6 +211,13 @@ function complete(app: FastifyInstance, id: string, token: string) {
   return app.inject({
     method: 'POST',
     url: `/api/v1/recordings/${id}/complete`,
+    headers: bearer(token),
+  });
+}
+function getTranscription(app: FastifyInstance, id: string, token: string) {
+  return app.inject({
+    method: 'GET',
+    url: `/api/v1/recordings/${id}/transcription`,
     headers: bearer(token),
   });
 }

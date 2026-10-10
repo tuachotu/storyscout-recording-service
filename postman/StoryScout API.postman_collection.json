@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "90dfe277-27d9-4295-a499-306b269e3b0b",
+      "id": "a3e0a64d-f27a-486e-9685-4607b211c9ba",
       "name": "Check process health",
       "request": {
         "name": "Check process health",
@@ -24,7 +24,7 @@
       },
       "response": [
         {
-          "id": "64623352-b352-416a-8841-6dca7f91c909",
+          "id": "37af8c1b-6964-45ef-9b13-413589699ed5",
           "name": "Process is healthy",
           "originalRequest": {
             "url": {
@@ -55,7 +55,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "298f887a-1097-476c-b9d2-15db1a57f02f",
+          "id": "61601674-60c4-4ce0-bf52-d33ed6aba57f",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -92,7 +92,7 @@
       }
     },
     {
-      "id": "daec8a3a-cb42-498c-a9d4-56b921843e1f",
+      "id": "5db9db0c-f7c1-4d1f-a6de-efe42ef99709",
       "name": "Check S3 readiness",
       "request": {
         "name": "Check S3 readiness",
@@ -115,7 +115,7 @@
       },
       "response": [
         {
-          "id": "61f9e293-3dfb-4599-9570-b23bf52aeae5",
+          "id": "ae7f9193-cc5a-4d5f-ae7b-b21309ede458",
           "name": "S3 is reachable",
           "originalRequest": {
             "url": {
@@ -146,7 +146,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "2c24ca2d-0033-42b7-a9f6-56411c091d5f",
+          "id": "66cdc6cf-9f6d-45cb-a8ca-34469aa940bb",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -177,7 +177,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "bf2cf444-26ee-4785-8125-12a1ce5e18a5",
+          "id": "afd437f2-e645-45a2-b9e1-64760b7dca80",
           "name": "S3 is not reachable",
           "originalRequest": {
             "url": {
@@ -202,7 +202,7 @@
       }
     },
     {
-      "id": "24005c06-546c-4aa4-9b31-dd102fa1e113",
+      "id": "4f084060-b174-420e-9a34-7ea8913c141e",
       "name": "Validate a participant access code",
       "request": {
         "name": "Validate a participant access code",
@@ -238,7 +238,7 @@
       },
       "response": [
         {
-          "id": "217328b1-5b75-47c3-8193-a741ee69932c",
+          "id": "687d02ff-1c24-4468-bb07-b585dcaa7cd9",
           "name": "Temporary access granted",
           "originalRequest": {
             "url": {
@@ -282,7 +282,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "7e8977ac-0883-4eaf-8aee-644515530947",
+          "id": "142b6b80-4383-46c6-8943-945e7529db08",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -332,7 +332,7 @@
       }
     },
     {
-      "id": "35d1d5fd-6ba3-4958-99b7-609e9c2444c8",
+      "id": "830dcd11-194d-4228-8dec-840fee02781b",
       "name": "Create a direct S3 recording upload",
       "request": {
         "name": "Create a direct S3 recording upload",
@@ -356,7 +356,7 @@
         "method": "POST",
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/webm\",\n  \"sizeBytes\": \"<integer>\"\n}",
+          "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/x-wav\",\n  \"sizeBytes\": \"<integer>\"\n}",
           "options": {
             "raw": {
               "headerFamily": "json",
@@ -376,7 +376,7 @@
       },
       "response": [
         {
-          "id": "b3090828-8e49-4e4a-8f60-156f78f8500b",
+          "id": "94eaf79a-33b5-45c9-8409-a4969fe967c5",
           "name": "Recording created with scoped S3 upload instructions",
           "originalRequest": {
             "url": {
@@ -398,7 +398,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/webm\",\n  \"sizeBytes\": \"<integer>\"\n}",
+              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/x-wav\",\n  \"sizeBytes\": \"<integer>\"\n}",
               "options": {
                 "raw": {
                   "headerFamily": "json",
@@ -415,12 +415,12 @@
               "value": "application/json"
             }
           ],
-          "body": "{\n  \"recording\": {\n    \"recordingId\": \"<string>\",\n    \"participantName\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"storageState\": \"ready\",\n    \"originalFilename\": \"<string>\",\n    \"contentType\": \"audio/mpeg\",\n    \"completedAt\": \"<string,null-date-time>\",\n    \"sizeBytes\": \"<integer,null>\"\n  },\n  \"upload\": {\n    \"url\": \"<uri>\",\n    \"method\": \"<string>\",\n    \"headers\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"expiresAt\": \"<dateTime>\"\n  }\n}",
+          "body": "{\n  \"recording\": {\n    \"recordingId\": \"<string>\",\n    \"participantName\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"storageState\": \"awaitingUpload\",\n    \"originalFilename\": \"<string>\",\n    \"contentType\": \"audio/mp4\",\n    \"completedAt\": \"<string,null-date-time>\",\n    \"sizeBytes\": \"<integer,null>\"\n  },\n  \"upload\": {\n    \"url\": \"<uri>\",\n    \"method\": \"<string>\",\n    \"headers\": {\n      \"key_0\": \"<string>\"\n    },\n    \"expiresAt\": \"<dateTime>\"\n  }\n}",
           "cookie": [],
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "4745bbc8-79bc-4117-a45d-e5706f15b6d0",
+          "id": "c7c08cb8-8c4e-412d-9ea5-c13370de3556",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -442,7 +442,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/webm\",\n  \"sizeBytes\": \"<integer>\"\n}",
+              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/x-wav\",\n  \"sizeBytes\": \"<integer>\"\n}",
               "options": {
                 "raw": {
                   "headerFamily": "json",
@@ -464,7 +464,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "cdd12ef3-df18-44c4-96c7-899a6741372d",
+          "id": "800b6f09-6a5c-4f5c-95ac-f2a94b0d590d",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -486,7 +486,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/webm\",\n  \"sizeBytes\": \"<integer>\"\n}",
+              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/x-wav\",\n  \"sizeBytes\": \"<integer>\"\n}",
               "options": {
                 "raw": {
                   "headerFamily": "json",
@@ -514,7 +514,7 @@
       }
     },
     {
-      "id": "536f5554-339b-4772-9cf6-8d6648adb439",
+      "id": "e5e82571-8b9d-4648-82cf-6d3b4eccd35e",
       "name": "Get recording ingestion status",
       "request": {
         "name": "Get recording ingestion status",
@@ -526,7 +526,7 @@
           "variable": [
             {
               "type": "any",
-              "value": "recording_yWu5",
+              "value": "recording_rc9RAS",
               "key": "recordingId",
               "disabled": false,
               "description": {
@@ -556,7 +556,7 @@
       },
       "response": [
         {
-          "id": "dae37642-1266-4d54-93c7-928be9cd9d28",
+          "id": "63492aa4-8315-45ae-bd6f-2896a6343807",
           "name": "Recording ingestion status",
           "originalRequest": {
             "url": {
@@ -571,7 +571,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_yWu5",
+                  "value": "recording_rc9RAS",
                   "key": "recordingId"
                 }
               ]
@@ -593,12 +593,12 @@
               "value": "application/json"
             }
           ],
-          "body": "{\n  \"recordingId\": \"<string>\",\n  \"participantName\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"storageState\": \"awaitingUpload\",\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/mp4\",\n  \"completedAt\": \"<string,null-date-time>\",\n  \"sizeBytes\": \"<integer,null>\"\n}",
+          "body": "{\n  \"recordingId\": \"<string>\",\n  \"participantName\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"storageState\": \"ready\",\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/x-wav\",\n  \"completedAt\": \"<string,null-date-time>\",\n  \"sizeBytes\": \"<integer,null>\"\n}",
           "cookie": [],
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "91c4e389-7e8f-471f-bc9f-abf80527d6a6",
+          "id": "5f50b0e9-a0e8-41b2-85c1-9203060af5e0",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -613,7 +613,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_yWu5",
+                  "value": "recording_rc9RAS",
                   "key": "recordingId"
                 }
               ]
@@ -646,7 +646,7 @@
       }
     },
     {
-      "id": "94aed8c3-7c89-4142-b3ca-7ca1ac8ca21c",
+      "id": "44f6b806-6787-44b6-8915-767eb918b96a",
       "name": "Verify and complete a recording upload",
       "request": {
         "name": "Verify and complete a recording upload",
@@ -658,7 +658,7 @@
           "variable": [
             {
               "type": "any",
-              "value": "recording_yWu5",
+              "value": "recording_rc9RAS",
               "key": "recordingId",
               "disabled": false,
               "description": {
@@ -688,7 +688,7 @@
       },
       "response": [
         {
-          "id": "24f0880b-2224-48ea-a301-b9b2e79065e0",
+          "id": "3905074e-51e4-4e41-b436-a9db69f85845",
           "name": "S3 upload verified",
           "originalRequest": {
             "url": {
@@ -703,7 +703,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_yWu5",
+                  "value": "recording_rc9RAS",
                   "key": "recordingId"
                 }
               ]
@@ -725,12 +725,12 @@
               "value": "application/json"
             }
           ],
-          "body": "{\n  \"recordingId\": \"<string>\",\n  \"participantName\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"storageState\": \"awaitingUpload\",\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/mp4\",\n  \"completedAt\": \"<string,null-date-time>\",\n  \"sizeBytes\": \"<integer,null>\"\n}",
+          "body": "{\n  \"recordingId\": \"<string>\",\n  \"participantName\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"storageState\": \"ready\",\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/x-wav\",\n  \"completedAt\": \"<string,null-date-time>\",\n  \"sizeBytes\": \"<integer,null>\"\n}",
           "cookie": [],
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "1d1ceb87-6921-4f13-a484-b9422d9f4d3c",
+          "id": "ca25d855-dbde-42a2-bef7-0d004427f22a",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -745,7 +745,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_yWu5",
+                  "value": "recording_rc9RAS",
                   "key": "recordingId"
                 }
               ]
@@ -776,6 +776,264 @@
       "protocolProfileBehavior": {
         "disableBodyPruning": true
       }
+    },
+    {
+      "id": "fd87cabd-da71-41f2-85cc-7cc404435121",
+      "name": "Get the completed transcription for a recording",
+      "request": {
+        "name": "Get the completed transcription for a recording",
+        "description": {},
+        "url": {
+          "path": ["recordings", ":recordingId", "transcription"],
+          "host": ["{{baseUrl}}"],
+          "query": [],
+          "variable": [
+            {
+              "type": "any",
+              "value": "recording_rc9RAS",
+              "key": "recordingId",
+              "disabled": false,
+              "description": {
+                "content": "(Required) ",
+                "type": "text/plain"
+              }
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "body": {},
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{bearerToken}}"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "d1387dc4-84a6-4df4-ad4c-3983a4775e36",
+          "name": "Recording metadata and transcription text",
+          "originalRequest": {
+            "url": {
+              "path": ["recordings", ":recordingId", "transcription"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "recording_rc9RAS",
+                  "key": "recordingId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"recording\": {\n    \"recordingId\": \"<string>\",\n    \"participantName\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"storageState\": \"awaitingUpload\",\n    \"originalFilename\": \"<string>\",\n    \"contentType\": \"audio/mpeg\",\n    \"completedAt\": \"<string,null-date-time>\",\n    \"sizeBytes\": \"<integer,null>\"\n  },\n  \"transcription\": {\n    \"text\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "0d5ead45-5969-467d-9399-592a6c3a1484",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["recordings", ":recordingId", "transcription"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "recording_rc9RAS",
+                  "key": "recordingId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "96f9257c-fe05-404c-aa4b-507d1ee05d8d",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["recordings", ":recordingId", "transcription"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "recording_rc9RAS",
+                  "key": "recordingId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "f98054a1-2f84-404c-8b02-e560931fa180",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["recordings", ":recordingId", "transcription"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "recording_rc9RAS",
+                  "key": "recordingId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "c9dcfa3d-8cd6-42a3-89d7-0a81051fcdca",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["recordings", ":recordingId", "transcription"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "recording_rc9RAS",
+                  "key": "recordingId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Conflict",
+          "code": 409,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
     }
   ],
   "event": [],
@@ -786,7 +1044,7 @@
     }
   ],
   "info": {
-    "_postman_id": "f1bd6503-3105-41d2-b740-d9c8cc73d5c5",
+    "_postman_id": "779dbe16-c4ba-47dc-b8a7-5103d9bb993e",
     "name": "StoryScout Recording Ingestion API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {

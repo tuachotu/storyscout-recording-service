@@ -1,5 +1,27 @@
 # StoryScout Backend Status
 
+## Get transcription endpoint — September 7, 2026
+
+- Approved plan: `~/storyscout/planning/2026-09-07/get-transcription-endpoint/plan.md`.
+- Created local branch `get-transcription` from clean, synchronized `main` at `b4151c4`.
+- Approved endpoint: `GET /api/v1/recordings/{recordingId}/transcription`, authenticated and
+  participant-scoped, returning recording metadata and S3 `transcription.txt` text as JSON.
+- Implemented storage-backed S3 transcript retrieval and the authenticated participant-owned route.
+- Focused recording tests now cover successful retrieval, incomplete recordings, missing
+  transcripts, and cross-participant isolation; all 7 focused tests and TypeScript checking pass.
+- Updated the canonical OpenAPI contract, regenerated the Postman collection, and documented the
+  endpoint in the README and curl examples.
+- The first full validation run passed contract, Postman parsing, TypeScript, and ESLint checks,
+  then found only generated Postman collection formatting; applied Prettier normalization.
+- Final tests explicitly cover authentication, invalid recording IDs, recording readiness, missing
+  transcripts, successful JSON retrieval, and participant isolation.
+- Full `npm run check` passes: OpenAPI, Postman JSON, TypeScript, ESLint, Prettier, 9 active tests,
+  and the production build.
+- Final branch diff contains only the approved endpoint, storage operation, tests, contract,
+  generated Postman collection, and documentation/status updates.
+- Next action: none within the approved local implementation scope; commit and push remain
+  unapproved.
+
 ## Repository publication — September 7, 2026
 
 - Approved target: public GitHub repository `storyscout-recording-service`, default branch `main`.

@@ -120,6 +120,22 @@ paths:
             content: { application/json: { schema: { $ref: '#/components/schemas/Recording' } } },
           }
         '409': { $ref: '#/components/responses/Error' }
+  /recordings/{recordingId}/transcription:
+    parameters: [{ $ref: '#/components/parameters/RecordingId' }]
+    get:
+      summary: Get the completed transcription for a recording
+      operationId: getRecordingTranscription
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Recording metadata and transcription text
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RecordingTranscription' }
+        '400': { $ref: '#/components/responses/Error' }
+        '401': { $ref: '#/components/responses/Error' }
+        '404': { $ref: '#/components/responses/Error' }
+        '409': { $ref: '#/components/responses/Error' }
 components:
   securitySchemes:
     bearerAuth: { type: http, scheme: bearer }
@@ -150,6 +166,16 @@ components:
         originalFilename: { type: string }
         contentType: { $ref: '#/components/schemas/AudioContentType' }
         sizeBytes: { type: [integer, 'null'] }
+    RecordingTranscription:
+      type: object
+      required: [recording, transcription]
+      properties:
+        recording: { $ref: '#/components/schemas/Recording' }
+        transcription:
+          type: object
+          required: [text]
+          properties:
+            text: { type: string }
     ErrorResponse:
       type: object
       required: [error]
