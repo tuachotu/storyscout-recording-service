@@ -117,3 +117,58 @@ in [`docs/aws-recording-ingestion.md`](docs/aws-recording-ingestion.md).
 ## License
 
 No open-source license has been granted for this repository. All rights are reserved.
+
+## Book reader (local)
+
+The public read-only reader resolves `books/{bookId}/book.json` without a per-book
+configuration map. It reads prepared content; it does not edit or generate stories.
+Anyone who has a book link can read and obtain temporary audio/image links.
+
+Run with your existing AWS credentials (standard SDK credential chain):
+
+```sh
+cd /Users/vikrantsingh/storyscout/storyscout-backend
+AWS_REGION=us-east-1 S3_BOOK_BUCKET=story-scout-recording-bucket BOOK_PREFIX=books npm run dev
+```
+
+The backend listens at `http://127.0.0.1:3001`. The default allowed frontend origin
+is `http://localhost:5173`; add other local origins through `WEBAPP_ORIGINS` when
+needed. `S3_BOOK_BUCKET` defaults to `S3_RECORDING_BUCKET`. No OpenAI key is required
+for the reader. The runtime needs read access to the canonical manifests and their
+referenced assets. No bucket listing, content writes, or public bucket policy is
+required. Use the existing `.env` loading procedure for recording participants;
+the command above runs the public reader with the default empty participant list.
+
+Reader endpoints are in the OpenAPI contract and generated Postman collection:
+
+- `GET /api/v1/books/{bookId}` — ordered summaries and language availability.
+- `GET /api/v1/books/{bookId}/chapters/{chapterId}?version=original|english` — text.
+- `GET /api/v1/books/{bookId}/chapters/{chapterId}/audio` — signed audio URL.
+
+Manifest v1 has `schemaVersion`, `title`, and ordered `chapters`. Each chapter has
+`id`, `sourceLanguage`, `audioKey`, `summaryKey`, `refinedStoryKey`, nullable
+`englishTranslationKey`, optional `transcriptKey`/`originalSummaryKey`, and an
+optional `images` array of `{ key, alt, caption? }`. Stable chapter IDs are separate
+from displayed numbers. All keys are relative S3 object keys in the configured
+bucket, constrained to `{BOOK_PREFIX}/{bookId}/` or
+`recordings/{owner UUID}/Books/{bookId}/`. Cross-book references and traversal are
+rejected. Only trusted administrators should be able to write manifests.
+
+Unknown books/chapters/content return 404; invalid manifests return 502; unavailable
+storage returns 503. Missing summaries display as unavailable without removing a
+chapter. English originals use their original text without a duplicate translation
+link. Media URLs last up to one hour (credential expiry may shorten that); the
+frontend refreshes audio URLs on expiry/failure. API responses use `no-store`.
+
+Original audio plays through a native HTML audio element without cross-origin
+fetch or Web Audio processing. Local playback needs no additional S3 CORS rule.
+Future hosting must serve frontend deep links through `index.html`.
+
+### Partial chapter content
+
+Audio, both summary, refined-story, and translation references may be omitted or
+null. The overview returns `summary` (English) and `originalSummary` as nullable
+text, plus `hasAudio`, `hasRefinedStory`, and `hasEnglishTranslation`, checked against
+actual S3 objects. Missing/empty objects disable their controls; storage connection
+or permission failures remain retryable errors. Reading views also check availability
+of the alternate version before offering its link.

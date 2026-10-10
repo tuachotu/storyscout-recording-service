@@ -15,6 +15,11 @@ const ConfigSchema = z.object({
   OPENAI_AUDIO_REQUEST_LIMIT_BYTES: z.coerce.number().int().positive().default(25_000_000),
   AWS_REGION: z.string().min(1).default('us-east-1'),
   S3_RECORDING_BUCKET: z.string().min(3).default('story-scout-recording-bucket'),
+  S3_BOOK_BUCKET: z.string().min(3).optional(),
+  BOOK_PREFIX: z
+    .string()
+    .regex(/^[a-zA-Z0-9_-]+(?:\/[a-zA-Z0-9_-]+)*$/)
+    .default('books'),
   RECORDING_PREFIX: z.string().min(1).default('recordings'),
   PARTICIPANTS_JSON: z.string().default('[]'),
   SESSION_SIGNING_SECRET: z.string().min(32).default('local-development-secret-change-me'),
@@ -36,6 +41,8 @@ export interface AppConfig {
   awsRegion?: string;
   s3RecordingBucket?: string;
   recordingPrefix?: string;
+  s3BookBucket?: string;
+  bookPrefix?: string;
   participants?: Array<{ guid: string; displayName: string }>;
   sessionSigningSecret?: string;
   sessionLifetimeSeconds?: number;
@@ -73,6 +80,8 @@ export function loadConfig(environment: NodeJS.ProcessEnv = process.env): AppCon
     awsRegion: parsed.AWS_REGION,
     s3RecordingBucket: parsed.S3_RECORDING_BUCKET,
     recordingPrefix: parsed.RECORDING_PREFIX,
+    s3BookBucket: parsed.S3_BOOK_BUCKET ?? parsed.S3_RECORDING_BUCKET,
+    bookPrefix: parsed.BOOK_PREFIX,
     participants,
     sessionSigningSecret: parsed.SESSION_SIGNING_SECRET,
     sessionLifetimeSeconds: parsed.SESSION_LIFETIME_SECONDS,

@@ -73,3 +73,38 @@
 - Known incomplete files: None within approved implementation scope
 - Git status: `main` tracks `origin/main` at `https://github.com/tuachotu/storyscout-recording-service`
 - Application status: Phase 7 checkpoint is `~/storyscout/planning/2026-08-22/failed-recordings-recovery.json`; recordings 6, 7, and 18 all have verified beside-source transcripts
+
+## Book reader — October 6, 2026
+
+- Approved plan: ../planning/2026-10-06/book-reader/plan.md.
+- Added read-only book storage/routes and canonical books/{bookId}/book.json lookup.
+- Existing uncommitted transcription work preserved. TypeScript passes.
+- Next: contract/tests, full checks, and live local S3 verification. No deployment approved.
+- Completed OpenAPI/Postman contract and focused book tests. Full `npm run check`
+  passed, including 23 backend tests and production build.
+- Live local API verification matched all 16 summaries and 32 reading texts to
+  prepared sources; all 16 signed audio links returned exact bytes for initial and
+  seek ranges. Evidence: ../planning/2026-10-06/book-reader/live-verification.json.
+- Backend running on 127.0.0.1:3001. No AWS mutations or infrastructure changes.
+- Local book reader scope complete; startup instructions are in README.md.
+- Bilingual/availability amendment: nullable summary/reference support, actual S3
+  availability flags and retryable transient errors complete. Full checks pass with
+  27 backend tests. All 16 live summary pairs and availability checks verified.
+- Reader deployment preparation complete under ../planning/2026-10-06/book-reader-deployment/.
+  Production recording/authentication hashes match local; backend archive prepared.
+  Upload and installation remain unapproved; production unchanged.
+
+## Commit preparation — October 9, 2026
+
+- Approved plan: ../planning/2026-10-09/commit-preparation/plan.md.
+- Full `npm run check` passed: 27 tests, OpenAPI/Postman validation, TypeScript, lint, formatting and build.
+- Candidate files passed credential-pattern and whitespace checks; generated builds and
+  local environment files are excluded. No application source changes were needed.
+- Proposed commit contents/messages are in the preparation report. Nothing staged,
+  committed, pushed or deployed during this preparation.
+
+## Local commits — October 9, 2026
+
+- User approved the proposed local commits; pushing remains unapproved.
+- Commit preparation checks passed. This snapshot records the approved implementation
+  and validation; commit identifiers are recorded in the external planning progress log.

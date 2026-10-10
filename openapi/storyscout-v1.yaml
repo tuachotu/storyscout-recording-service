@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
-  title: StoryScout Recording Ingestion API
-  version: 1.1.0
+  title: StoryScout Recording and Book Reader API
+  version: 1.2.0
   description: GUID-gated, direct-to-S3 browser recording ingestion. Processing and delivery are separate modules.
   license:
     name: Proprietary
@@ -10,6 +10,59 @@ servers:
   - url: /api/v1
 security: []
 paths:
+  /books/{bookId}:
+    get:
+      summary: Read a book title and ordered chapter summaries
+      description: Public read-only access by book ID. Resolves books/{bookId}/book.json in the configured bucket; no recording session required.
+      operationId: getBook
+      parameters:
+        - $ref: '#/components/parameters/BookId'
+      responses:
+        '200':
+          description: Ordered book contents
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Book' }
+        '404': { $ref: '#/components/responses/Error' }
+        '502': { $ref: '#/components/responses/Error' }
+        '503': { $ref: '#/components/responses/Error' }
+  /books/{bookId}/chapters/{chapterId}:
+    get:
+      summary: Read original-language refined text or English translation
+      operationId: getBookChapter
+      parameters:
+        - $ref: '#/components/parameters/BookId'
+        - $ref: '#/components/parameters/ChapterId'
+        - name: version
+          in: query
+          schema: { type: string, enum: [original, english], default: original }
+      responses:
+        '200':
+          description: Chapter text and optional signed image URLs; English originals use the original text in either view
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BookChapterText' }
+        '400': { $ref: '#/components/responses/Error' }
+        '404': { $ref: '#/components/responses/Error' }
+        '502': { $ref: '#/components/responses/Error' }
+        '503': { $ref: '#/components/responses/Error' }
+  /books/{bookId}/chapters/{chapterId}/audio:
+    get:
+      summary: Obtain a temporary original-recording URL
+      description: Checks the manifest-referenced object exists and signs it for up to one hour. Refetch after expiry or media access failure. Credential expiry can shorten URL lifetime. Responses are not cached.
+      operationId: getBookChapterAudio
+      parameters:
+        - $ref: '#/components/parameters/BookId'
+        - $ref: '#/components/parameters/ChapterId'
+      responses:
+        '200':
+          description: Signed audio link
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BookMediaLink' }
+        '404': { $ref: '#/components/responses/Error' }
+        '502': { $ref: '#/components/responses/Error' }
+        '503': { $ref: '#/components/responses/Error' }
   /health:
     get:
       summary: Check process health
@@ -140,12 +193,96 @@ components:
   securitySchemes:
     bearerAuth: { type: http, scheme: bearer }
   parameters:
+    BookId:
+      name: bookId
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+    ChapterId:
+      name: chapterId
+      in: path
+      required: true
+      schema: { type: string, pattern: '^[a-zA-Z0-9_-]{1,100}$' }
     RecordingId:
       name: recordingId
       in: path
       required: true
       schema: { type: string, pattern: '^recording_[A-Za-z0-9_-]+$' }
   schemas:
+    BookMediaLink:
+      type: object
+      required: [url, expiresAt]
+      properties:
+        url: { type: string, format: uri }
+        expiresAt: { type: string, format: date-time }
+    BookChapterSummary:
+      type: object
+      required:
+        [
+          id,
+          number,
+          sourceLanguage,
+          summary,
+          originalSummary,
+          hasAudio,
+          hasRefinedStory,
+          hasEnglishTranslation,
+        ]
+      properties:
+        id: { type: string }
+        number: { type: integer, minimum: 1 }
+        sourceLanguage: { type: string }
+        summary: { type: [string, 'null'] }
+        originalSummary: { type: [string, 'null'] }
+        hasAudio: { type: boolean }
+        hasRefinedStory: { type: boolean }
+        hasEnglishTranslation: { type: boolean }
+    Book:
+      type: object
+      required: [id, title, chapters]
+      properties:
+        id: { type: string, format: uuid }
+        title: { type: string }
+        chapters:
+          type: array
+          items: { $ref: '#/components/schemas/BookChapterSummary' }
+    BookChapterText:
+      type: object
+      required:
+        [
+          bookId,
+          bookTitle,
+          id,
+          number,
+          sourceLanguage,
+          language,
+          version,
+          text,
+          images,
+          hasEnglishTranslation,
+          hasRefinedStory,
+        ]
+      properties:
+        bookId: { type: string, format: uuid }
+        bookTitle: { type: string }
+        id: { type: string }
+        number: { type: integer, minimum: 1 }
+        sourceLanguage: { type: string }
+        language: { type: string }
+        version: { type: string, enum: [original, english] }
+        text: { type: string }
+        hasEnglishTranslation: { type: boolean }
+        hasRefinedStory: { type: boolean }
+        images:
+          type: array
+          items:
+            type: object
+            required: [url, expiresAt, alt]
+            properties:
+              url: { type: string, format: uri }
+              expiresAt: { type: string, format: date-time }
+              alt: { type: string }
+              caption: { type: string }
     Status:
       type: object
       required: [status]

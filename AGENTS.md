@@ -29,3 +29,12 @@
   step.
 - On resumption, read the approved plan, progress log, and `STATUS.md`; inspect
   the actual files and rerun the last relevant validation before continuing.
+
+## Approved book reader amendment — 2026-10-06
+
+The user approved public read-only book reader endpoints backed by private S3,
+manifest lookup at books/{bookId}/book.json, chapter summaries, prepared text and
+translations, and signed audio/image URLs. This overrides conflicting historical
+feature restrictions above for this scope only. Live S3 reads and local tests are
+approved. See ../planning/2026-10-06/book-reader/plan.md. No external writes or
+infrastructure changes without separate approval.

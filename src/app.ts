@@ -5,6 +5,8 @@ import cors from '@fastify/cors';
 import multipart from '@fastify/multipart';
 import Fastify, { type FastifyInstance } from 'fastify';
 
+import { registerBookRoutes } from './books/routes.js';
+import { S3BookStorage, type BookStorage } from './books/storage.js';
 import { AccessSessions } from './access/sessions.js';
 import { loadConfig, type AppConfig } from './config.js';
 import { AppError, sendError } from './errors.js';
@@ -15,6 +17,7 @@ import type { TranscriptionProvider } from './transcriptions/provider.js';
 
 export interface BuildAppOptions {
   config?: AppConfig;
+  bookStorage?: BookStorage;
   logger?: boolean;
   ingestionStorage?: IngestionStorage;
   transcriptionProvider?: TranscriptionProvider;
@@ -74,5 +77,14 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<FastifyIn
     uploadUrlSeconds: config.uploadUrlSeconds ?? 900,
     recordingPrefix: config.recordingPrefix ?? 'recordings',
   });
+  registerBookRoutes(
+    app,
+    options.bookStorage ??
+      new S3BookStorage(
+        new S3Client({ region: config.awsRegion ?? 'us-east-1' }),
+        config.s3BookBucket ?? config.s3RecordingBucket ?? 'story-scout-recording-bucket',
+      ),
+    config.bookPrefix ?? 'books',
+  );
   return app;
 }

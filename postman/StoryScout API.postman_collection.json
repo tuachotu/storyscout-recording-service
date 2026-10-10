@@ -1,7 +1,849 @@
 {
   "item": [
     {
-      "id": "a3e0a64d-f27a-486e-9685-4607b211c9ba",
+      "id": "48448ee0-c14e-42f5-9695-19b2e741b3a6",
+      "name": "Read a book title and ordered chapter summaries",
+      "request": {
+        "name": "Read a book title and ordered chapter summaries",
+        "description": {
+          "content": "Public read-only access by book ID. Resolves books/{bookId}/book.json in the configured bucket; no recording session required.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": ["books", ":bookId"],
+          "host": ["{{baseUrl}}"],
+          "query": [],
+          "variable": [
+            {
+              "type": "any",
+              "value": "<uuid>",
+              "key": "bookId",
+              "disabled": false,
+              "description": {
+                "content": "(Required) ",
+                "type": "text/plain"
+              }
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "body": {},
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "8dbff0e3-7cd0-47b8-9d83-c6c14c6c7ac1",
+          "name": "Ordered book contents",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": \"<uuid>\",\n  \"title\": \"<string>\",\n  \"chapters\": [\n    {\n      \"id\": \"<string>\",\n      \"number\": \"<integer>\",\n      \"sourceLanguage\": \"<string>\",\n      \"summary\": \"<string,null>\",\n      \"originalSummary\": \"<string,null>\",\n      \"hasAudio\": \"<boolean>\",\n      \"hasRefinedStory\": \"<boolean>\",\n      \"hasEnglishTranslation\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"number\": \"<integer>\",\n      \"sourceLanguage\": \"<string>\",\n      \"summary\": \"<string,null>\",\n      \"originalSummary\": \"<string,null>\",\n      \"hasAudio\": \"<boolean>\",\n      \"hasRefinedStory\": \"<boolean>\",\n      \"hasEnglishTranslation\": \"<boolean>\"\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a3149c8e-e623-473b-8f3b-d65e1b7cd48e",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "c889758c-79cc-4daf-b882-1f3af83126ed",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Gateway",
+          "code": 502,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "e1d659ad-4d3f-4261-b527-34deaeb18845",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "08b9fa88-1897-4f85-97f3-656d1561bfaa",
+      "name": "Read original-language refined text or English translation",
+      "request": {
+        "name": "Read original-language refined text or English translation",
+        "description": {},
+        "url": {
+          "path": ["books", ":bookId", "chapters", ":chapterId"],
+          "host": ["{{baseUrl}}"],
+          "query": [
+            {
+              "disabled": false,
+              "description": {
+                "content": " (This can only be one of original,english)",
+                "type": "text/plain"
+              },
+              "key": "version",
+              "value": "original"
+            }
+          ],
+          "variable": [
+            {
+              "type": "any",
+              "value": "<uuid>",
+              "key": "bookId",
+              "disabled": false,
+              "description": {
+                "content": "(Required) ",
+                "type": "text/plain"
+              }
+            },
+            {
+              "type": "any",
+              "value": "7s87VlUCVUfY0b-kiouUqtHL1S-f",
+              "key": "chapterId",
+              "disabled": false,
+              "description": {
+                "content": "(Required) ",
+                "type": "text/plain"
+              }
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "body": {},
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "e1b4d7ba-7cf4-46b2-9801-6f5f7ade7c36",
+          "name": "Chapter text and optional signed image URLs; English originals use the original text in either view",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId", "chapters", ":chapterId"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": " (This can only be one of original,english)",
+                    "type": "text/plain"
+                  },
+                  "key": "version",
+                  "value": "original"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "7s87VlUCVUfY0b-kiouUqtHL1S-f",
+                  "key": "chapterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"bookId\": \"<uuid>\",\n  \"bookTitle\": \"<string>\",\n  \"id\": \"<string>\",\n  \"number\": \"<integer>\",\n  \"sourceLanguage\": \"<string>\",\n  \"language\": \"<string>\",\n  \"version\": \"original\",\n  \"text\": \"<string>\",\n  \"images\": [\n    {\n      \"url\": \"<uri>\",\n      \"expiresAt\": \"<dateTime>\",\n      \"alt\": \"<string>\",\n      \"caption\": \"<string>\"\n    },\n    {\n      \"url\": \"<uri>\",\n      \"expiresAt\": \"<dateTime>\",\n      \"alt\": \"<string>\",\n      \"caption\": \"<string>\"\n    }\n  ],\n  \"hasEnglishTranslation\": \"<boolean>\",\n  \"hasRefinedStory\": \"<boolean>\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d01fdb4d-8fff-440d-915e-f7918ddcbf1a",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId", "chapters", ":chapterId"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": " (This can only be one of original,english)",
+                    "type": "text/plain"
+                  },
+                  "key": "version",
+                  "value": "original"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "7s87VlUCVUfY0b-kiouUqtHL1S-f",
+                  "key": "chapterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "82218f2a-1508-4060-a843-948584ccb100",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId", "chapters", ":chapterId"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": " (This can only be one of original,english)",
+                    "type": "text/plain"
+                  },
+                  "key": "version",
+                  "value": "original"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "7s87VlUCVUfY0b-kiouUqtHL1S-f",
+                  "key": "chapterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "53503b0b-fd96-402e-8d4c-18c2edecefc7",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId", "chapters", ":chapterId"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": " (This can only be one of original,english)",
+                    "type": "text/plain"
+                  },
+                  "key": "version",
+                  "value": "original"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "7s87VlUCVUfY0b-kiouUqtHL1S-f",
+                  "key": "chapterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Gateway",
+          "code": 502,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "856cadc7-e2c5-47f3-94f3-7fecd2908bc6",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId", "chapters", ":chapterId"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": " (This can only be one of original,english)",
+                    "type": "text/plain"
+                  },
+                  "key": "version",
+                  "value": "original"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "7s87VlUCVUfY0b-kiouUqtHL1S-f",
+                  "key": "chapterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "f1fb54fc-a932-4357-813b-158e435eeca7",
+      "name": "Obtain a temporary original-recording URL",
+      "request": {
+        "name": "Obtain a temporary original-recording URL",
+        "description": {
+          "content": "Checks the manifest-referenced object exists and signs it for up to one hour. Refetch after expiry or media access failure. Credential expiry can shorten URL lifetime. Responses are not cached.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": ["books", ":bookId", "chapters", ":chapterId", "audio"],
+          "host": ["{{baseUrl}}"],
+          "query": [],
+          "variable": [
+            {
+              "type": "any",
+              "value": "<uuid>",
+              "key": "bookId",
+              "disabled": false,
+              "description": {
+                "content": "(Required) ",
+                "type": "text/plain"
+              }
+            },
+            {
+              "type": "any",
+              "value": "7s87VlUCVUfY0b-kiouUqtHL1S-f",
+              "key": "chapterId",
+              "disabled": false,
+              "description": {
+                "content": "(Required) ",
+                "type": "text/plain"
+              }
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "body": {},
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "d40fef58-1507-4749-ae2e-b59af339a597",
+          "name": "Signed audio link",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId", "chapters", ":chapterId", "audio"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "7s87VlUCVUfY0b-kiouUqtHL1S-f",
+                  "key": "chapterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"url\": \"<uri>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "ff473b36-929e-480e-9485-424d305b6717",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId", "chapters", ":chapterId", "audio"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "7s87VlUCVUfY0b-kiouUqtHL1S-f",
+                  "key": "chapterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "1236ce79-8fae-4a5f-8b39-021c9a8c7989",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId", "chapters", ":chapterId", "audio"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "7s87VlUCVUfY0b-kiouUqtHL1S-f",
+                  "key": "chapterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Gateway",
+          "code": 502,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "e94f7e0b-6c92-4dbe-85ef-d397a838d869",
+          "name": "Request rejected",
+          "originalRequest": {
+            "url": {
+              "path": ["books", ":bookId", "chapters", ":chapterId", "audio"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bookId"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) ",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "7s87VlUCVUfY0b-kiouUqtHL1S-f",
+                  "key": "chapterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"requestId\": \"<string>\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "79966a37-f1c1-456f-a99b-87e7a021c2f3",
       "name": "Check process health",
       "request": {
         "name": "Check process health",
@@ -24,7 +866,7 @@
       },
       "response": [
         {
-          "id": "37af8c1b-6964-45ef-9b13-413589699ed5",
+          "id": "a500df54-36ef-40b0-8e89-811dd89027ab",
           "name": "Process is healthy",
           "originalRequest": {
             "url": {
@@ -55,7 +897,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "61601674-60c4-4ce0-bf52-d33ed6aba57f",
+          "id": "ce1071e4-1f02-4fef-98e2-a54066523693",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -92,7 +934,7 @@
       }
     },
     {
-      "id": "5db9db0c-f7c1-4d1f-a6de-efe42ef99709",
+      "id": "5046d467-f27c-446e-a59a-8887f0c7c0d4",
       "name": "Check S3 readiness",
       "request": {
         "name": "Check S3 readiness",
@@ -115,7 +957,7 @@
       },
       "response": [
         {
-          "id": "ae7f9193-cc5a-4d5f-ae7b-b21309ede458",
+          "id": "b13bbd81-19fa-44a7-a406-b8016d84d756",
           "name": "S3 is reachable",
           "originalRequest": {
             "url": {
@@ -146,7 +988,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "66cdc6cf-9f6d-45cb-a8ca-34469aa940bb",
+          "id": "d790c2d7-7408-455d-a44e-13e88d23bf91",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -177,7 +1019,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "afd437f2-e645-45a2-b9e1-64760b7dca80",
+          "id": "dd46c786-2269-4553-9518-2f24128947a7",
           "name": "S3 is not reachable",
           "originalRequest": {
             "url": {
@@ -202,7 +1044,7 @@
       }
     },
     {
-      "id": "4f084060-b174-420e-9a34-7ea8913c141e",
+      "id": "b75e3765-1f0e-4f87-965e-e8ff9af397a3",
       "name": "Validate a participant access code",
       "request": {
         "name": "Validate a participant access code",
@@ -238,7 +1080,7 @@
       },
       "response": [
         {
-          "id": "687d02ff-1c24-4468-bb07-b585dcaa7cd9",
+          "id": "3a202c68-8011-4288-8c72-e379ea56fbb3",
           "name": "Temporary access granted",
           "originalRequest": {
             "url": {
@@ -282,7 +1124,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "142b6b80-4383-46c6-8943-945e7529db08",
+          "id": "4956879b-d387-411a-8b79-d3f324c59645",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -332,7 +1174,7 @@
       }
     },
     {
-      "id": "830dcd11-194d-4228-8dec-840fee02781b",
+      "id": "63526e44-6ec0-4f6a-bef8-9cd2257aceee",
       "name": "Create a direct S3 recording upload",
       "request": {
         "name": "Create a direct S3 recording upload",
@@ -356,7 +1198,7 @@
         "method": "POST",
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/x-wav\",\n  \"sizeBytes\": \"<integer>\"\n}",
+          "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/mpeg\",\n  \"sizeBytes\": \"<integer>\"\n}",
           "options": {
             "raw": {
               "headerFamily": "json",
@@ -376,7 +1218,7 @@
       },
       "response": [
         {
-          "id": "94eaf79a-33b5-45c9-8409-a4969fe967c5",
+          "id": "e42d2284-28dc-4506-8227-ee38e199139d",
           "name": "Recording created with scoped S3 upload instructions",
           "originalRequest": {
             "url": {
@@ -398,7 +1240,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/x-wav\",\n  \"sizeBytes\": \"<integer>\"\n}",
+              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/mpeg\",\n  \"sizeBytes\": \"<integer>\"\n}",
               "options": {
                 "raw": {
                   "headerFamily": "json",
@@ -415,12 +1257,12 @@
               "value": "application/json"
             }
           ],
-          "body": "{\n  \"recording\": {\n    \"recordingId\": \"<string>\",\n    \"participantName\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"storageState\": \"awaitingUpload\",\n    \"originalFilename\": \"<string>\",\n    \"contentType\": \"audio/mp4\",\n    \"completedAt\": \"<string,null-date-time>\",\n    \"sizeBytes\": \"<integer,null>\"\n  },\n  \"upload\": {\n    \"url\": \"<uri>\",\n    \"method\": \"<string>\",\n    \"headers\": {\n      \"key_0\": \"<string>\"\n    },\n    \"expiresAt\": \"<dateTime>\"\n  }\n}",
+          "body": "{\n  \"recording\": {\n    \"recordingId\": \"<string>\",\n    \"participantName\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"storageState\": \"ready\",\n    \"originalFilename\": \"<string>\",\n    \"contentType\": \"audio/mpeg\",\n    \"completedAt\": \"<string,null-date-time>\",\n    \"sizeBytes\": \"<integer,null>\"\n  },\n  \"upload\": {\n    \"url\": \"<uri>\",\n    \"method\": \"<string>\",\n    \"headers\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"expiresAt\": \"<dateTime>\"\n  }\n}",
           "cookie": [],
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "c7c08cb8-8c4e-412d-9ea5-c13370de3556",
+          "id": "8a5cb15b-e025-4de4-9d06-46b994677eaa",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -442,7 +1284,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/x-wav\",\n  \"sizeBytes\": \"<integer>\"\n}",
+              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/mpeg\",\n  \"sizeBytes\": \"<integer>\"\n}",
               "options": {
                 "raw": {
                   "headerFamily": "json",
@@ -464,7 +1306,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "800b6f09-6a5c-4f5c-95ac-f2a94b0d590d",
+          "id": "73030ee6-cd04-422c-936d-4e6187184adf",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -486,7 +1328,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/x-wav\",\n  \"sizeBytes\": \"<integer>\"\n}",
+              "raw": "{\n  \"originalFilename\": \"<string>\",\n  \"contentType\": \"audio/mpeg\",\n  \"sizeBytes\": \"<integer>\"\n}",
               "options": {
                 "raw": {
                   "headerFamily": "json",
@@ -514,7 +1356,7 @@
       }
     },
     {
-      "id": "e5e82571-8b9d-4648-82cf-6d3b4eccd35e",
+      "id": "85b043da-7aa1-452b-b045-46709d36ae59",
       "name": "Get recording ingestion status",
       "request": {
         "name": "Get recording ingestion status",
@@ -526,7 +1368,7 @@
           "variable": [
             {
               "type": "any",
-              "value": "recording_rc9RAS",
+              "value": "recording_bgyiBv",
               "key": "recordingId",
               "disabled": false,
               "description": {
@@ -556,7 +1398,7 @@
       },
       "response": [
         {
-          "id": "63492aa4-8315-45ae-bd6f-2896a6343807",
+          "id": "f1eca3d3-2b91-4702-9ab6-b56cc58ef327",
           "name": "Recording ingestion status",
           "originalRequest": {
             "url": {
@@ -571,7 +1413,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_rc9RAS",
+                  "value": "recording_bgyiBv",
                   "key": "recordingId"
                 }
               ]
@@ -598,7 +1440,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "5f50b0e9-a0e8-41b2-85c1-9203060af5e0",
+          "id": "e068dac9-c0d3-43ac-b5b9-f7888a9a601f",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -613,7 +1455,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_rc9RAS",
+                  "value": "recording_bgyiBv",
                   "key": "recordingId"
                 }
               ]
@@ -646,7 +1488,7 @@
       }
     },
     {
-      "id": "44f6b806-6787-44b6-8915-767eb918b96a",
+      "id": "5c3c64c3-b788-42fb-a782-751760e34bbc",
       "name": "Verify and complete a recording upload",
       "request": {
         "name": "Verify and complete a recording upload",
@@ -658,7 +1500,7 @@
           "variable": [
             {
               "type": "any",
-              "value": "recording_rc9RAS",
+              "value": "recording_bgyiBv",
               "key": "recordingId",
               "disabled": false,
               "description": {
@@ -688,7 +1530,7 @@
       },
       "response": [
         {
-          "id": "3905074e-51e4-4e41-b436-a9db69f85845",
+          "id": "6399c551-27d7-47f9-86eb-9b5feedad86e",
           "name": "S3 upload verified",
           "originalRequest": {
             "url": {
@@ -703,7 +1545,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_rc9RAS",
+                  "value": "recording_bgyiBv",
                   "key": "recordingId"
                 }
               ]
@@ -730,7 +1572,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "ca25d855-dbde-42a2-bef7-0d004427f22a",
+          "id": "fd323191-e877-4d60-9475-6db33c8d9efa",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -745,7 +1587,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_rc9RAS",
+                  "value": "recording_bgyiBv",
                   "key": "recordingId"
                 }
               ]
@@ -778,7 +1620,7 @@
       }
     },
     {
-      "id": "fd87cabd-da71-41f2-85cc-7cc404435121",
+      "id": "0c09c4dc-ca42-4185-aee1-6d3a328c98b7",
       "name": "Get the completed transcription for a recording",
       "request": {
         "name": "Get the completed transcription for a recording",
@@ -790,7 +1632,7 @@
           "variable": [
             {
               "type": "any",
-              "value": "recording_rc9RAS",
+              "value": "recording_bgyiBv",
               "key": "recordingId",
               "disabled": false,
               "description": {
@@ -820,7 +1662,7 @@
       },
       "response": [
         {
-          "id": "d1387dc4-84a6-4df4-ad4c-3983a4775e36",
+          "id": "1544109e-4cde-4be6-ad50-0c1f4b2c127a",
           "name": "Recording metadata and transcription text",
           "originalRequest": {
             "url": {
@@ -835,7 +1677,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_rc9RAS",
+                  "value": "recording_bgyiBv",
                   "key": "recordingId"
                 }
               ]
@@ -857,12 +1699,12 @@
               "value": "application/json"
             }
           ],
-          "body": "{\n  \"recording\": {\n    \"recordingId\": \"<string>\",\n    \"participantName\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"storageState\": \"awaitingUpload\",\n    \"originalFilename\": \"<string>\",\n    \"contentType\": \"audio/mpeg\",\n    \"completedAt\": \"<string,null-date-time>\",\n    \"sizeBytes\": \"<integer,null>\"\n  },\n  \"transcription\": {\n    \"text\": \"<string>\"\n  }\n}",
+          "body": "{\n  \"recording\": {\n    \"recordingId\": \"<string>\",\n    \"participantName\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"storageState\": \"awaitingUpload\",\n    \"originalFilename\": \"<string>\",\n    \"contentType\": \"audio/x-wav\",\n    \"completedAt\": \"<string,null-date-time>\",\n    \"sizeBytes\": \"<integer,null>\"\n  },\n  \"transcription\": {\n    \"text\": \"<string>\"\n  }\n}",
           "cookie": [],
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "0d5ead45-5969-467d-9399-592a6c3a1484",
+          "id": "bdca86d2-a0f4-4d6b-8cdf-94dbd3d24aad",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -877,7 +1719,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_rc9RAS",
+                  "value": "recording_bgyiBv",
                   "key": "recordingId"
                 }
               ]
@@ -904,7 +1746,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "96f9257c-fe05-404c-aa4b-507d1ee05d8d",
+          "id": "0277dd61-2ab8-44da-8432-140e1b65a19e",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -919,7 +1761,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_rc9RAS",
+                  "value": "recording_bgyiBv",
                   "key": "recordingId"
                 }
               ]
@@ -946,7 +1788,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "f98054a1-2f84-404c-8b02-e560931fa180",
+          "id": "56dff1af-56ca-402d-83e3-ab3fd4242110",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -961,7 +1803,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_rc9RAS",
+                  "value": "recording_bgyiBv",
                   "key": "recordingId"
                 }
               ]
@@ -988,7 +1830,7 @@
           "_postman_previewlanguage": "json"
         },
         {
-          "id": "c9dcfa3d-8cd6-42a3-89d7-0a81051fcdca",
+          "id": "54e01ca6-856a-4ee4-8a5f-e096899e0e2f",
           "name": "Request rejected",
           "originalRequest": {
             "url": {
@@ -1003,7 +1845,7 @@
                     "type": "text/plain"
                   },
                   "type": "any",
-                  "value": "recording_rc9RAS",
+                  "value": "recording_bgyiBv",
                   "key": "recordingId"
                 }
               ]
@@ -1044,8 +1886,8 @@
     }
   ],
   "info": {
-    "_postman_id": "779dbe16-c4ba-47dc-b8a7-5103d9bb993e",
-    "name": "StoryScout Recording Ingestion API",
+    "_postman_id": "8e5506ed-8a11-4ac0-87fb-061f626657a5",
+    "name": "StoryScout Recording and Book Reader API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "GUID-gated, direct-to-S3 browser recording ingestion. Processing and delivery are separate modules.",

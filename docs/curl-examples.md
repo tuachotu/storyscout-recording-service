@@ -194,3 +194,15 @@ Common contract errors include:
 - `413` for an audio file over the configured limit
 - `415 UNSUPPORTED_AUDIO_FORMAT`
 - `416` for an invalid audio byte range
+
+## Read a book
+
+```sh
+curl http://localhost:3001/api/v1/books/9146a916-a99e-4917-89a3-207f20c1b47e
+curl 'http://localhost:3001/api/v1/books/9146a916-a99e-4917-89a3-207f20c1b47e/chapters/recording-5?version=original'
+curl 'http://localhost:3001/api/v1/books/9146a916-a99e-4917-89a3-207f20c1b47e/chapters/recording-5?version=english'
+curl http://localhost:3001/api/v1/books/9146a916-a99e-4917-89a3-207f20c1b47e/chapters/recording-5/audio
+```
+
+These public read-only routes do not need a recording access session. Audio URLs
+expire; request a new link when needed.
