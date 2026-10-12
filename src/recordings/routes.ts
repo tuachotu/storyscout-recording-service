@@ -83,6 +83,19 @@ export async function registerRecordingRoutes(
     return reply.send(present(await findOwned(request.params, participant, options)));
   });
 
+  app.get('/api/v1/recordings/:recordingId/transcription', async (request, reply) => {
+    const participant = authenticate(request, options.sessions);
+    const recording = await findOwned(request.params, participant, options);
+    if (recording.storageState !== 'ready') {
+      throw new AppError(409, 'RECORDING_NOT_READY', 'The recording upload is not complete.');
+    }
+    const text = await options.storage.getTranscription(recording);
+    if (text === null) {
+      throw new AppError(404, 'TRANSCRIPTION_NOT_FOUND', 'The transcription was not found.');
+    }
+    return reply.send({ recording: present(recording), transcription: { text } });
+  });
+
   app.post('/api/v1/recordings/:recordingId/complete', async (request, reply) => {
     const participant = authenticate(request, options.sessions);
     const recording = await findOwned(request.params, participant, options);
